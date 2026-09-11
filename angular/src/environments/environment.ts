@@ -3,7 +3,7 @@ import { Environment } from '@abp/ng.core';
 const baseUrl = 'http://localhost:4200';
 
 const oAuthConfig = {
-  issuer: 'https://localhost:44316/',
+  issuer: 'https://localhost:44375/',
   redirectUri: baseUrl,
   clientId: 'SmartPantry_App',
   responseType: 'code',
@@ -20,7 +20,7 @@ export const environment = {
   oAuthConfig,
   apis: {
     default: {
-      url: 'https://localhost:44316',
+      url: 'https://localhost:44375',
       rootNamespace: 'SmartPantry',
     },
     AbpAccountPublic: {

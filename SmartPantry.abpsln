@@ -1,6 +1,6 @@
 {
-  "id": "05be26a6-5066-4e64-9402-7deaf871ecfe",
-  "creationTime": "09/09/2026 01:42:27 +00:00",
+  "id": "2bce5178-2fca-4c1b-8571-614486da5f6a",
+  "creationTime": "09/11/2026 21:41:24 +00:00",
   "template": "app",
   "versions": {
     "AbpFramework": "10.6.0",
@@ -38,7 +38,7 @@
     "distributedEventBus": "none",
     "databaseProvider": "ef",
     "runDbMigrator": "",
-    "databaseManagementSystem": "sqlite",
+    "databaseManagementSystem": "sqlserver",
     "separateTenantSchema": "false",
     "createInitialMigration": "",
     "theme": "leptonx-lite",
@@ -52,6 +52,6 @@
     "sampleCrudPage": "true",
     "selectedLanguages": ["English", "Arabic", "Chinese (Simplified)", "Chinese (Traditional)", "Czech", "English (UK)", "Finnish", "French", "German (Germany)", "Hindi ", "Hungarian", "Icelandic", "Italian", "Korean", "Portuguese (Brazil)", "Romanian (Romania)", "Russian", "Slovak", "Spanish", "Swedish", "Turkish", ],
     "defaultLanguage": "English",
-    "createCommand": "abp new SmartPantry -t app --ui-framework angular --database-provider ef --database-management-system sqlite --theme leptonx-lite --skip-migration  --skip-migrator  --without-cms-kit --sample-crud-page --dont-run-install-libs --dont-run-bundling --no-multi-tenancy --no-social-logins -no-gdpr -no-openiddict-admin-ui -no-audit-logging -no-file-management -no-language-management -no-text-template-management"
+    "createCommand": "abp new SmartPantry -t app --ui-framework angular --database-provider ef --database-management-system sqlserver --theme leptonx-lite --skip-migration  --skip-migrator  --without-cms-kit --sample-crud-page --dont-run-install-libs --dont-run-bundling --no-multi-tenancy --no-social-logins -no-gdpr -no-openiddict-admin-ui -no-audit-logging -no-file-management -no-language-management -no-text-template-management"
   }
 }

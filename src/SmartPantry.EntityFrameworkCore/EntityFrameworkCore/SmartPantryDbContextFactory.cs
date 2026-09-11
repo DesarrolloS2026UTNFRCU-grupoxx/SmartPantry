@@ -17,7 +17,7 @@ public class SmartPantryDbContextFactory : IDesignTimeDbContextFactory<SmartPant
         SmartPantryEfCoreEntityExtensionMappings.Configure();
 
         var builder = new DbContextOptionsBuilder<SmartPantryDbContext>()
-            .UseSqlite(configuration.GetConnectionString("Default"));
+            .UseSqlServer(configuration.GetConnectionString("Default"));
         
         return new SmartPantryDbContext(builder.Options);
     }
