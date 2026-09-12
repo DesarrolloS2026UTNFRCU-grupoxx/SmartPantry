@@ -48,6 +48,10 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+x64/
+x86/
+[Bb]in/
+
 # Build results on 'Bin' directories
 **/[Bb]in/*
 # Uncomment if you have tasks that rely on *.refresh files to move binaries
@@ -127,6 +131,8 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
+
+*_i.h
 
 # Chutzpah Test files
 _Chutzpah*
@@ -229,8 +235,10 @@ PublishScripts/
 *.snupkg
 # The packages folder can be ignored because of Package Restore
 **/[Pp]ackages/*
+**/packages/*
 # except build/, which is used as an MSBuild target.
 !**/[Pp]ackages/build/
+!**/packages/build/
 # Uncomment if necessary however generally it will be regenerated when needed
 #!**/[Pp]ackages/repositories.config
 # NuGet v3's project.json files produces more ignorable files
@@ -259,6 +267,7 @@ _pkginfo.txt
 *.[Cc]ache
 # but keep track of directories ending in .cache
 !?*.[Cc]ache/
+!*.[Cc]ache/
 
 # Others
 ClientBin/
@@ -344,9 +353,11 @@ _Pvt_Extensions
 # Paket dependency manager
 **/.paket/paket.exe
 paket-files/
+.paket/paket.exe
 
 # FAKE - F# Make
 **/.fake/
+.fake/
 
 # CodeRush personal settings
 **/.cr/personal
@@ -428,3 +439,34 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+.JustCode
+
+# JetBrains Rider
+**/.idea/
+*.sln.iml
+
+# ABP Studio
+**/.abpstudio/
+**/*.abppkg.analyze.json
+
+*.code-workspace
+
+# SmartPantry
+src/SmartPantry.Web/Logs/*
+src/SmartPantry.Web.Host/Logs/*
+src/SmartPantry.Web.Public/Logs/*
+src/SmartPantry.Web.Public.Host/Logs/*
+src/SmartPantry.AuthServer/Logs/*
+src/SmartPantry.HttpApi.Host/Logs/*
+src/SmartPantry.HttpApi.Host/Logs/*
+src/SmartPantry.DbMigrator/Logs/*
+src/SmartPantry.Blazor.Server/Logs/*
+src/SmartPantry.Blazor.Server.Tiered/Logs/*
+
+# Use abp install-libs to restore.
+**/wwwroot/libs/*
+
+# IdentityServer temp files
+tempkey.rsa
+tempkey.jwk
