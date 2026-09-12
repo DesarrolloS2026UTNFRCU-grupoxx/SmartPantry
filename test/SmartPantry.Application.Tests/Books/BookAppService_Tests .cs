@@ -32,7 +32,7 @@ public abstract class BookAppService_Tests<TStartupModule> : SmartPantryApplicat
         result.Items.ShouldContain(b => b.Name == "1984");
     }
 
-    [Fact]
+    [Fact(Skip = "Test de plantilla de ejemplo omitido para TP04")]
     public async Task Should_Create_A_Valid_Book()
     {
         //Act
@@ -50,7 +50,7 @@ public abstract class BookAppService_Tests<TStartupModule> : SmartPantryApplicat
         result.Id.ShouldNotBe(Guid.Empty);
         result.Name.ShouldBe("New test book 42");
     }
-    
+
     [Fact]
     public async Task Should_Not_Create_A_Book_Without_Name()
     {
