@@ -470,3 +470,6 @@ src/SmartPantry.Blazor.Server.Tiered/Logs/*
 # IdentityServer temp files
 tempkey.rsa
 tempkey.jwk
+# Angular build cache
+.angular/cache
+.angular/
