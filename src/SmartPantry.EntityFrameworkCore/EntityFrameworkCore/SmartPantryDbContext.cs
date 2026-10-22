@@ -98,6 +98,11 @@ public class SmartPantryDbContext :
 
         /* Configure your own tables/entities inside here */
 
+        builder.Entity<PantryItem>(b =>
+        {
+            b.ToTable("TodoItems");
+        });
+
         //builder.Entity<YourEntity>(b =>
         //{
         //    b.ToTable(SmartPantryConsts.DbTablePrefix + "YourEntities", SmartPantryConsts.DbSchema);
