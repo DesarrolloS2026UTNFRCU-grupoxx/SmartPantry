@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SmartPantry.Authors;
 using SmartPantry.Books;
-using SmartPantry.Entities;
+using SmartPantryApp.Entities;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
@@ -100,7 +100,7 @@ public class SmartPantryDbContext :
 
         builder.Entity<PantryItem>(b =>
         {
-            b.ToTable("TodoItems");
+            b.ToTable("PantryItems");
         });
 
         //builder.Entity<YourEntity>(b =>

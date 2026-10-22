@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SmartPantry;
+namespace SmartPantryApp;
 
 public class PantryItemDto
 {
