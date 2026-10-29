@@ -100,7 +100,15 @@ public class SmartPantryDbContext :
 
         builder.Entity<PantryItem>(b =>
         {
-            b.ToTable("PantryItems");
+            b.ToTable(SmartPantryConsts.DbTablePrefix + "PantryItem",
+                SmartPantryConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+            b.Property(x => x.Id).IsRequired().HasMaxLength(128);
+            b.Property(x => x.PantryId).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Barcode).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Expiration).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Status).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Note).HasMaxLength(512); 
         });
 
         //builder.Entity<YourEntity>(b =>

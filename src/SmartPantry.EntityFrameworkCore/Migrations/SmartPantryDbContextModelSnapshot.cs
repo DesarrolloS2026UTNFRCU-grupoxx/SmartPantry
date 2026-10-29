@@ -145,32 +145,38 @@ namespace SmartPantry.Migrations
                     b.ToTable("AppBooks", (string)null);
                 });
 
-            modelBuilder.Entity("SmartPantry.Entities.PantryItem", b =>
+            modelBuilder.Entity("SmartPantryApp.Entities.PantryItem", b =>
                 {
                     b.Property<Guid>("Id")
+                        .HasMaxLength(128)
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Barcode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<DateTime>("Expiration")
+                        .HasMaxLength(128)
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Note")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<Guid>("PantryId")
+                        .HasMaxLength(128)
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("PantryItems");
+                    b.ToTable("AppPantryItem", (string)null);
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>
