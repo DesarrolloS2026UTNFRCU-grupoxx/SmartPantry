@@ -51,6 +51,12 @@ public class PantryItemAppService_Validation_Tests : SmartPantryApplicationTestB
             pantryId: pantryId);
 
         var
-    }
+
+        var exception = await Assert.ThrowsAsync<AbpValidationException>(async () =>
+        {
+            await _productAppService.CreateAsync(createdDto)
+        });
+        exception.ValidationErrors.ShouldContain(error => error.MemberNames.Any(member => member == "barcode"));
+    };
 
 }
