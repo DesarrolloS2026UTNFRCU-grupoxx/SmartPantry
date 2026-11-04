@@ -5,13 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
+using Volo.Abp.DependencyInjection;
 using Volo.Abp.Domain.Repositories;
 
 namespace SmartPantryApp;
 
 /* Inherit your application services from this class.
  */
-public abstract class SmartPantryAppService : ApplicationService, ISmartPantryService
+[ExposeServices(typeof(ISmartPantryService))]
+public class SmartPantryAppService : ApplicationService, ISmartPantryService
 {
     private readonly IRepository<PantryItem, Guid> _smartPantryItemRepository;
 

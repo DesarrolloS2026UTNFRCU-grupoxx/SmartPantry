@@ -8,7 +8,7 @@ using Shouldly;
 
 namespace SmartPantry;
 
-public class PantryItemDomain_Tests : SmartPantryDomainTestBase<SmartPantryDomainTestModule>
+public class PantryItemDomain_Tests
 {
     [Fact]
     public async Task Should_Create_Valid_PantryItem_And_Normalize_Text()
