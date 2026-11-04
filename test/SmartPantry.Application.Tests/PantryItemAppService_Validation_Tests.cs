@@ -5,17 +5,19 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
+using Volo.Abp.Modularity;
 using Volo.Abp.Validation;
 using Xunit;
 
 namespace SmartPantry;
 
-public class PantryItemAppService_Validation_Tests : SmartPantryApplicationTestBase<SmartPantryApplicationTestModule>
+public abstract class PantryItemAppService_Validation_Tests<TStartupModule> : SmartPantryApplicationTestBase<TStartupModule>
+    where TStartupModule : IAbpModule
 {
     private readonly ISmartPantryService _pantryItemAppService;
     private readonly IRepository<PantryItem, Guid> _pantryItemRepository;
 
-    public PantryItemAppService_Validation_Tests()
+    protected PantryItemAppService_Validation_Tests()
     {
         _pantryItemAppService = GetRequiredService<ISmartPantryService>();
         _pantryItemRepository = GetRequiredService<IRepository<PantryItem, Guid>>();
