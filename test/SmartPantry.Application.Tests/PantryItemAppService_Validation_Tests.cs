@@ -39,24 +39,21 @@ public class PantryItemAppService_Validation_Tests : SmartPantryApplicationTestB
         itemInDb.Note.ShouldBe("Leche descremada");
         itemInDb.Status.ShouldBe("Active");
     }
-    public async Task Should_Fail_when_barcode_isEmpty()
+    public async Task Should_Fail_when_barcode_isEmpty(){
     {
         var pantryId = Guid.NewGuid();
 
-        var createdDto = await _pantryItemAppService.CreateAsync(
-            note: "Leche descremada",
-            status: "Active",
-            expiration: DateTime.Now.AddDays(30),
-            barcode: "",
-            pantryId: pantryId);
-
-        var
-
         var exception = await Assert.ThrowsAsync<AbpValidationException>(async () =>
         {
-            await _productAppService.CreateAsync(createdDto)
+            await _pantryItemAppService.CreateAsync(
+                note: "Leche descremada",
+                status: "Active",
+                expiration: DateTime.Now.AddDays(30),
+                barcode: "",
+                pantryId: pantryId);
         });
-        exception.ValidationErrors.ShouldContain(error => error.MemberNames.Any(member => member == "barcode"));
-    };
+
+        exception.ValidationErrors.ShouldContain(error => error.MemberNames.Any(member => member == "Barcode" || member == "barcode"));
+    }
 
 }
