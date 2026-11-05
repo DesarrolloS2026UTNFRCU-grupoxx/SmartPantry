@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using SmartPantry.Authors;
 using SmartPantry.Books;
+using SmartPantryApp.Entities;
+using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -11,9 +12,9 @@ using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.FeatureManagement.EntityFrameworkCore;
 using Volo.Abp.Identity;
 using Volo.Abp.Identity.EntityFrameworkCore;
+using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
 using Volo.Abp.SettingManagement.EntityFrameworkCore;
-using Volo.Abp.OpenIddict.EntityFrameworkCore;
 
 namespace SmartPantry.EntityFrameworkCore;
 
@@ -28,6 +29,8 @@ public class SmartPantryDbContext :
     public DbSet<Author> Authors { get; set; }
 
     public DbSet<Book> Books { get; set; }
+
+    public DbSet<PantryItem> PantryItems { get; set; }
 
     #region Entities from the modules
 
@@ -94,6 +97,19 @@ public class SmartPantryDbContext :
         });
 
         /* Configure your own tables/entities inside here */
+
+        builder.Entity<PantryItem>(b =>
+        {
+            b.ToTable(SmartPantryConsts.DbTablePrefix + "PantryItem",
+                SmartPantryConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+            b.Property(x => x.Id).IsRequired().HasMaxLength(128);
+            b.Property(x => x.PantryId).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Barcode).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Expiration).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Status).IsRequired().HasMaxLength(128);
+            b.Property(x => x.Note).HasMaxLength(512); 
+        });
 
         //builder.Entity<YourEntity>(b =>
         //{
