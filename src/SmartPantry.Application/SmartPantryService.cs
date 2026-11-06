@@ -17,15 +17,28 @@ public class SmartPantryService : ApplicationService, ISmartPantryService
     {
         _smartPantryItemRepository = smartPantryItemRepository;
     }
-    public async Task<List<PantryItemDto>> GetListAsync()
+    /*public async Task<List<PantryItemDto>> GetListAsync()
     {
         var items = await _smartPantryItemRepository.GetListAsync();
         return items
             .Select(item => new PantryItemDto
             {
                 Id = item.Id,
-                /* Text = item.text */
+                *//* Text = item.text *//*
             }).ToList();
+    }*/
+    public async Task<PantryItemDto> GetAsync(Guid id)
+    {
+        var item = await _smartPantryItemRepository.GetAsync(id);
+        return new PantryItemDto
+        {
+            Id = item.Id,
+            Note = item.Note,
+            Expiration = item.Expiration,
+            Barcode = item.Barcode,
+            Status = item.Status,
+            PantryId = item.PantryId
+        };
     }
     public async Task<PantryItemDto> CreateAsync(string note, string status, DateTime expiration, string barcode, Guid pantryId)
     {
@@ -50,8 +63,8 @@ public class SmartPantryService : ApplicationService, ISmartPantryService
         };
     }
 
-    public async Task DeleteAsync(Guid id)
+   /* public async Task DeleteAsync(Guid id)
     {
         await _smartPantryItemRepository.DeleteAsync(id);
-    }
+    }*/
 }

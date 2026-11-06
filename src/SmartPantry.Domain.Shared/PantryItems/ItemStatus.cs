@@ -7,6 +7,7 @@ namespace SmartPantry.PantryItems
     public enum ItemStatus
     {
         Cerrado,
-        Abierto
+        Abierto,
+        Mal_estado
     }
 }
