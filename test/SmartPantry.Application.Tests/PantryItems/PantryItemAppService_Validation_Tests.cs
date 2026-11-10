@@ -42,6 +42,7 @@ public abstract class PantryItemAppService_Validation_Tests<TStartupModule> : Sm
         itemInDb.Note.ShouldBe("Leche descremada");
         itemInDb.Status.ShouldBe("Active");
     }
+    [Fact]
     public async Task Should_Fail_when_barcode_isEmpty()
     {
         var pantryId = Guid.NewGuid();
