@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using SmartPantry.Authors;
 using SmartPantry.Books;
 using SmartPantryApp.Entities;
+using SmartPantry.PantryItems;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.BlobStoring.Database.EntityFrameworkCore;
