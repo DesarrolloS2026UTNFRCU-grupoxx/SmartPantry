@@ -1,3 +1,4 @@
+using SmartPantry.PantryItems;
 using Xunit;
 
 namespace SmartPantry.EntityFrameworkCore.Applications;

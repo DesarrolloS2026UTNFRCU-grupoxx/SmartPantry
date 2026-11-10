@@ -8,6 +8,7 @@ namespace SmartPantry.PantryItems
     {
         Cerrado,
         Abierto,
-        Mal_estado
+        Mal_estado,
+        Consumido
     }
 }

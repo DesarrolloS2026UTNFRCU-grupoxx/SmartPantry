@@ -9,7 +9,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.Validation;
 using Xunit;
 
-namespace SmartPantry;
+namespace SmartPantry.PantryItems;
 
 public abstract class PantryItemAppService_Validation_Tests<TStartupModule> : SmartPantryApplicationTestBase<TStartupModule>
     where TStartupModule : IAbpModule
