@@ -1,58 +1,45 @@
-﻿using SmartPantryApp.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
+﻿using System;
+using SmartPantryApp.Entities;
 using Shouldly;
+using Xunit;
 
 namespace SmartPantry;
 
 public class PantryItemDomain_Tests
 {
     [Fact]
-    public async Task Should_Create_Valid_PantryItem_And_Normalize_Text()
+    public void Should_Create_Valid_PantryItem_And_Normalize_Text()
     {
-        // Arrange
         var pantryId = Guid.NewGuid();
         var barcode = "7791234567890";
         var inputNote = "  Comprado en oferta  ";
-        var expectedNote = "Comprado en oferta"; // Texto normalizado (sin espacios sobrantes)
+        var expectedNote = "Comprado en oferta";
 
-        // Act
-        var pantryItem = new PantryItem
-        {
-            Id = Guid.NewGuid(),
-            PantryId = pantryId,
-            Barcode = barcode,
-            Expiration = DateTime.Now.AddMonths(3),
-            Status = "Active",
-            Note = inputNote.Trim() // Simulando o aplicando la normalización
-        };
+        var pantryItem = new PantryItem(
+            Guid.NewGuid(),
+            pantryId,
+            barcode,
+            DateTime.Now.AddMonths(3),
+            "Consumido",
+            inputNote);
 
-        // Assert
         pantryItem.Barcode.ShouldBe(barcode);
         pantryItem.Note.ShouldBe(expectedNote);
-        pantryItem.Status.ShouldBe("Active");
+        pantryItem.Status.ShouldBe("Consumido");
     }
 
     [Theory]
     [InlineData("")]
     [InlineData("   ")]
     [InlineData(null)]
-    public async Task Should_Reject_Empty_Or_Whitespace_Barcode(string invalidBarcode)
+    public void Should_Reject_Empty_Or_Whitespace_Barcode(string invalidBarcode)
     {
-        // Act & Assert
-        Should.Throw<ArgumentException>(() =>
-        {
-            if (string.IsNullOrWhiteSpace(invalidBarcode))
-                throw new ArgumentException("El código de barras es obligatorio.");
-
-            var pantryItem = new PantryItem
-            {
-                Barcode = invalidBarcode
-            };
-        });
+        Should.Throw<ArgumentException>(() => new PantryItem(
+            Guid.NewGuid(),
+            Guid.NewGuid(),
+            invalidBarcode,
+            DateTime.Now.AddMonths(3),
+            "Consumido",
+            null));
     }
 }
-

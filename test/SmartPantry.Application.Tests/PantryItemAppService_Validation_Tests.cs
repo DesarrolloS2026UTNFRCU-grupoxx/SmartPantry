@@ -30,7 +30,7 @@ public abstract class PantryItemAppService_Validation_Tests<TStartupModule> : Sm
 
         var createdDto = await _pantryItemAppService.CreateAsync(
             note: "Leche descremada",
-            status: "Active",
+            status: "Cerrado",
             expiration: DateTime.Now.AddDays(30),
             barcode: "7798765432109",
             pantryId: pantryId);
@@ -40,7 +40,7 @@ public abstract class PantryItemAppService_Validation_Tests<TStartupModule> : Sm
         itemInDb.ShouldNotBeNull();
         itemInDb.Barcode.ShouldBe("7798765432109");
         itemInDb.Note.ShouldBe("Leche descremada");
-        itemInDb.Status.ShouldBe("Active");
+        itemInDb.Status.ShouldBe("Cerrado");
     }
     public async Task Should_Fail_when_barcode_isEmpty()
     {
@@ -50,7 +50,7 @@ public abstract class PantryItemAppService_Validation_Tests<TStartupModule> : Sm
         {
             await _pantryItemAppService.CreateAsync(
                 note: "Leche descremada",
-                status: "Active",
+                status: "Cerrado",
                 expiration: DateTime.Now.AddDays(30),
                 barcode: "",
                 pantryId: pantryId);

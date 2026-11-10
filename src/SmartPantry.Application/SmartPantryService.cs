@@ -30,15 +30,9 @@ public class SmartPantryService : ApplicationService, ISmartPantryService
     public async Task<PantryItemDto> CreateAsync(string note, string status, DateTime expiration, string barcode, Guid pantryId)
     {
         var pantryItem = await _smartPantryItemRepository.InsertAsync(
-            new PantryItem
-            {
-                Note = note,
-                Expiration = expiration,
-                Barcode = barcode,
-                PantryId = pantryId,
-                Status = status
-            }
-        );
+            new PantryItem(GuidGenerator.Create(), pantryId, barcode,
+                   expiration, status, note)
+            );
 
         return new PantryItemDto
         {

@@ -1,13 +1,13 @@
 ﻿using System;
+using Volo.Abp.Application.Dtos;
 
 namespace SmartPantryApp;
 
-public class PantryItemDto
+public class PantryItemDto : EntityDto<Guid>
 {
-    public Guid Id { get; set; }
-    public Guid PantryId { get; set; } = Guid.Empty;
+    public Guid PantryId { get; set; }
     public string Barcode { get; set; } = string.Empty;
-    public DateTime Expiration { get; set; } = DateTime.MinValue;
+    public DateTime Expiration { get; set; }
     public string Status { get; set; } = string.Empty;
     public string Note { get; set; } = string.Empty;
 }
