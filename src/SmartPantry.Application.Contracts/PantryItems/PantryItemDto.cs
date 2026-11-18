@@ -7,10 +7,12 @@ namespace SmartPantry.PantryItems
 {
     public class PantryItemDto : AuditedEntityDto<Guid>
     {
+        public string Name { get; set; } = string.Empty;
         public string Barcode { get; set; } = string.Empty;
         public DateTime Expiration { get; set; }
         public ItemStatus Status { get; set; }
         public DateTime Added { get; set; }
         public string? Note { get; set; }
+        public Guid PantryId { get; set; }
     }
 }

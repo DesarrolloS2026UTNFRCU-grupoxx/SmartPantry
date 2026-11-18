@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using Shouldly;
+using SmartPantry.PantryItems;
 
-namespace SmartPantry;
+namespace SmartPantry.PantryItems;
 
 public class PantryItem_Tests
 {
@@ -21,7 +22,7 @@ public class PantryItem_Tests
         pantryItem.PantryId = Guid.NewGuid();
         pantryItem.Barcode = "7791234567890";
         pantryItem.Expiration = DateTime.Now.AddMonths(3);
-        pantryItem.Status = "Cerrado";
+        pantryItem.Status = ItemStatus.Cerrado;
         pantryItem.Note = "Comprado en oferta";
 
 
@@ -29,7 +30,6 @@ public class PantryItem_Tests
         pantryItem.Id.ShouldNotBe(Guid.Empty);
         pantryItem.PantryId.ShouldNotBe(Guid.Empty);
         pantryItem.Barcode.ShouldNotBeNull();
-        pantryItem.Status.ShouldNotBeNull();
     }
 
     [Fact]
