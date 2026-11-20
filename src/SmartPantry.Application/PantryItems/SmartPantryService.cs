@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
-using Volo.Abp.ObjectMapping;
 
 namespace SmartPantry.PantryItems;
 
@@ -35,21 +34,22 @@ public class SmartPantryService : ApplicationService, ISmartPantryService
     public async Task<PantryItemDto> GetAsync(Guid id)
     {
         var item = await _smartPantryItemRepository.GetAsync(id);
-        return new PantryItemDto
-        {
-            Id = item.Id,
-            Note = item.Note,
-            Expiration = item.Expiration,
-            Barcode = item.Barcode,
-            Status = item.Status,
-            PantryId = item.PantryId
-        };
+        return ToDto(item);
     }
     public async Task<PantryItemDto> CreateAsync(CreateUpdatePantryItemDto input)
     {
-        var pantryItem = ObjectMapper.Map<CreateUpdatePantryItemDto, PantryItem>(input);
+        var pantryItem = new PantryItem
+        {
+            Id = GuidGenerator.Create(),
+            Name = input.Name,
+            PantryId = input.PantryId,
+            Barcode = input.Barcode,
+            Expiration = input.Expiration,
+            Status = ParseStatus(input.Status),
+            Note = input.Note
+        };
         await _smartPantryItemRepository.InsertAsync(pantryItem);
-        return ObjectMapper.Map<PantryItem, PantryItemDto>(pantryItem);
+        return ToDto(pantryItem);
     }
 
     public async Task DeleteAsync(Guid id)
@@ -67,7 +67,7 @@ public class SmartPantryService : ApplicationService, ISmartPantryService
         var items = await AsyncExecuter.ToListAsync(query);
         var totalCount = await AsyncExecuter.CountAsync(queryable);
 
-        var itemsDtos = ObjectMapper.Map<List<PantryItem>, List<PantryItemDto>>(items);
+        var itemsDtos = items.Select(ToDto).ToList();
         //await SetAuthorNamesAsync(itemsDtos);
 
         return new PagedResultDto<PantryItemDto>(
@@ -78,8 +78,34 @@ public class SmartPantryService : ApplicationService, ISmartPantryService
         public async Task<PantryItemDto> UpdateAsync(Guid id, CreateUpdatePantryItemDto input)
     {
         var item = await _smartPantryItemRepository.GetAsync(id);
-        ObjectMapper.Map(input, item);
+        item.Name = input.Name;
+        item.PantryId = input.PantryId;
+        item.Barcode = input.Barcode;
+        item.Expiration = input.Expiration;
+        item.Status = ParseStatus(input.Status);
+        item.Note = input.Note;
         await _smartPantryItemRepository.UpdateAsync(item);
-        return ObjectMapper.Map<PantryItem, PantryItemDto>(item);
+        return ToDto(item);
     }
+
+    private static ItemStatus ParseStatus(string value)
+    {
+        if (!Enum.TryParse<ItemStatus>(value, true, out var status) || !Enum.IsDefined(status))
+        {
+            throw new ArgumentException("El estado del ítem no es válido.", nameof(value));
+        }
+
+        return status;
+    }
+
+    private static PantryItemDto ToDto(PantryItem item) => new()
+    {
+        Id = item.Id,
+        Name = item.Name,
+        PantryId = item.PantryId,
+        Barcode = item.Barcode,
+        Expiration = item.Expiration,
+        Status = item.Status,
+        Note = item.Note
+    };
 }
