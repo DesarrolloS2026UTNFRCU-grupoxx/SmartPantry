@@ -26,7 +26,7 @@ public abstract class SmartPantryService_Tests<TStartupModule> : SmartPantryAppl
         //
         var a = new CreateUpdatePantryItemDto
         {
-
+            Name = "Mayonesa",
             Note = "Mayonesa",
             Status = "Cerrado",
             Expiration = DateTime.Now.AddMonths(3),
@@ -40,6 +40,8 @@ public abstract class SmartPantryService_Tests<TStartupModule> : SmartPantryAppl
         //Assert
         result.Id.ShouldNotBe(Guid.Empty);
         result.Name.ShouldBe("Mayonesa");
+        var persisted = await _smartPantryService.GetAsync(result.Id);
+        persisted.Name.ShouldBe("Mayonesa");
     }
 
     [Fact]
